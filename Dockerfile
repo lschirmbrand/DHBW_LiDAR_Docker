@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 LABEL Luca Schirmbrand
-SHELL ["/bin/bash", "-cl"] 
+SHELL ["/bin/bash", "-c"] 
 
 WORKDIR /schwarmroboter_ws/src
 ARG DEBIAN_FRONTEND=noninteractive
@@ -20,4 +20,4 @@ RUN git clone https://github.com/robopeak/rplidar_ros.git
 RUN apt-get install ros-noetic-catkin
 RUN apt-get install cmake
 WORKDIR /schwarmroboter_ws
-# RUN bash catkin_make
+RUN /bin/bash -c '. /opt/ros/noetic/setup.bash; cd /schwarmroboter_ws; catkin_make'
