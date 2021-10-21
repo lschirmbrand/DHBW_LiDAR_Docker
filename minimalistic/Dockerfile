@@ -26,8 +26,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get -y install git 
 
+#install ros & hectorslam
 WORKDIR /schwarmroboter_ws/src
 RUN git clone https://github.com/robopeak/rplidar_ros.git
+
+RUN git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 
 WORKDIR /schwarmroboter_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
