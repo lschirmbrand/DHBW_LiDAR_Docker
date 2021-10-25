@@ -1,9 +1,8 @@
-FROM ubuntu
+FROM ros:noetic-ros-core-focal
+
 LABEL Luca Schirmbrand
 
 ARG DEBIAN_FRONTEND=noninteractive
-
-FROM ros:noetic-ros-core-focal
 
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -26,11 +25,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get -y install git 
 
-#install ros & hectorslam
+# install ros & hectorslam
 WORKDIR /schwarmroboter_ws/src
 RUN git clone https://github.com/robopeak/rplidar_ros.git
-
 RUN git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
+
+# install necessary ros extensions
+RUN rosdep install -y --from-paths . -i
 
 WORKDIR /schwarmroboter_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
