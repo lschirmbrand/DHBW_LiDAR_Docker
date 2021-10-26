@@ -36,3 +36,11 @@ RUN rosdep install -y --from-paths . -i
 WORKDIR /schwarmroboter_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
     catkin_make"
+
+# Install vnc, xvfb in order to create a 'fake' display and firefox
+RUN     apt-get install -y x11vnc xvfb firefox
+RUN     mkdir ~/.vnc
+# Setup a password
+RUN     x11vnc -storepasswd 1234 ~/.vnc/passwd
+# Autostart firefox
+RUN     bash -c 'echo "firefox" >> /.bashrc'
