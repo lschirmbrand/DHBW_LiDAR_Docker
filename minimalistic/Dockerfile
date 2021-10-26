@@ -38,9 +38,11 @@ RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
     catkin_make"
 
 # Install vnc, xvfb in order to create a 'fake' display and firefox
-RUN     apt-get install -y x11vnc xvfb firefox
-RUN     mkdir ~/.vnc
-# Setup a password
-RUN     x11vnc -storepasswd 1234 ~/.vnc/passwd
+RUN apt-get -y install \
+    firefox \
+    libcanberra-gtk-module \
+    libcanberra-gtk3-module
+RUN apt-get clean
+
 # Autostart firefox
-RUN     bash -c 'echo "firefox" >> /.bashrc'
+CMD ["firefox"]
