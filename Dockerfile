@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # bootstrap rosdep
 RUN rosdep init && \
   rosdep update --rosdistro $ROS_DISTRO
+	rosdep update
 
 # install ros packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
