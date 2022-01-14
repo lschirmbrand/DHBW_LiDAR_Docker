@@ -2,7 +2,7 @@
 
 #### Install the Repository
 Navigate trough the terminam to the wanted directory. (e.g. ``cd ~/this/that/here``)
-Clone the repository into the directory with ```git clone https://github.com/lschirmbrand/DHBW_SR_Docker``
+Clone the repository into the directory with ``git clone https://github.com/lschirmbrand/DHBW_SR_Docker``
 
 #### Build der Dockerimage
 Navigate inside the cloned repository, standard case would be ``cd DHBW_SR_Docker``
