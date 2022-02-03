@@ -15,16 +15,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # bootstrap rosdep
 RUN rosdep init && \
   rosdep update --rosdistro $ROS_DISTRO && \
-  rosdep update
-
-# install ros packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-noetic-ros-base=1.5.0-1* \
-    && rm -rf /var/lib/apt/lists/*
 
 # install git
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    && apt-get -y install git 
+RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git
 
 # install ros & hectorslam
 WORKDIR /schwarmroboter_ws/src

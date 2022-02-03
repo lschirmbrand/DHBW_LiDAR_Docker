@@ -13,17 +13,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf /var/lib/apt/lists/*
 
 # bootstrap rosdep
-RUN rosdep init && \
+RUN #rosdep init && \
   rosdep update --rosdistro $ROS_DISTRO && \
   rosdep update
 
-# install ros packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-noetic-ros-base=1.5.0-1* \
-    && rm -rf /var/lib/apt/lists/*
-
 # install git
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN rm -rf /var/lib/apt/lists/*
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
     && apt-get -y install git 
 
 # install ros & hectorslam
@@ -48,9 +45,3 @@ RUN cp hector_slam_dhbw/srcs/launching/tutorial.launch src/hector_slam/hector_sl
 WORKDIR /schwarmroboter_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
     catkin_make_isolated -j1"
-
-# # Install vnc, xvfb in order to create a 'fake' display
-# RUN apt-get -y install \
-#     libcanberra-gtk-module \
-#     libcanberra-gtk3-module
-# RUN apt-get clean
