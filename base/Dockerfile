@@ -48,9 +48,3 @@ RUN cp hector_slam_dhbw/srcs/launching/tutorial.launch src/hector_slam/hector_sl
 WORKDIR /schwarmroboter_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
     catkin_make_isolated -j1"
-
-# Install vnc, xvfb in order to create a 'fake' display
-RUN apt-get -y install \
-    libcanberra-gtk-module \
-    libcanberra-gtk3-module
-RUN apt-get clean
