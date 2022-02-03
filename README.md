@@ -36,10 +36,10 @@ In every terminal you want to run anything ros-related, you have to first source
 
 To understand the project you might need to understand the different repositories and there combination. The used repositories are linked below:
 
-**DHBW_SR_Docker** (this repository): https://github.com/lschirmbrand/DHBW_SR_Docker
-**DHBW_SR_Remote:** https://github.com/lschirmbrand/DHBW_SR_Remote
-**DHBW_Slam_Files:** https://github.com/lschirmbrand/hector_slam_dhbw (To be renamed)
-**DHBW_RVIZ_Package:** https://github.com/lschirmbrand/DHBW_rviz_container
+**DHBW_SR_Docker** (this repository): <https://github.com/lschirmbrand/DHBW_SR_Docker>
+**DHBW_SR_Remote:** <https://github.com/lschirmbrand/DHBW_SR_Remote>
+**DHBW_Slam_Files:** <https://github.com/lschirmbrand/hector_slam_dhbw> (To be renamed)
+**DHBW_RVIZ_Package:** <https://github.com/lschirmbrand/DHBW_rviz_container>
 
 <img src="./layout.svg" width="50%">
 
@@ -73,7 +73,7 @@ To understand the project you might need to understand the different repositorie
 - Container of files, which will replace some of the standard files of the libraries
 - While the docker build process the old files gets deleted and replaced
 
-### DHBW_RVIZ_Package:
+### DHBW_RVIZ_Package
 
 - This package enables the visualisation to be more advanced than the basic visualisation.
 - Therefore, this package will only be pulled from the [DHBW_SR_Remote](https://github.com/lschirmbrand/DHBW_SR_Remote) Repository on its Build-Process.
