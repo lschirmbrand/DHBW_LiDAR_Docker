@@ -1,4 +1,4 @@
-FROM ros:noetic-ros-core-focal
+FROM ros:noetic-ros-core-focal@sha256:e66897669f09dd7c3d68ea4c4fe34df26ca125964acb093d94837a7b2e1f8475
 
 LABEL Luca Schirmbrand
 
