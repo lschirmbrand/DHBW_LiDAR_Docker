@@ -26,8 +26,6 @@ WORKDIR /schwarmroboter_ws/src
 RUN git clone https://github.com/robopeak/rplidar_ros.git
 RUN git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 
-# install necessary ros extensions
-RUN rosdep install -y --from-paths . -i
 
 # install adapted hector_slam files
 WORKDIR /schwarmroboter_ws
@@ -37,7 +35,12 @@ RUN git clone https://github.com/lschirmbrand/hector_slam_dhbw.git
 RUN rm src/hector_slam/hector_mapping/launch/mapping_default.launch
 RUN cp hector_slam_dhbw/srcs/mapping/mapping_default.launch src/hector_slam/hector_mapping/launch
 RUN rm src/hector_slam/hector_slam_launch/launch/tutorial.launch
-RUN cp hector_slam_dhbw/srcs/launching/tutorial.launch src/hector_slam/hector_slam_launch/launch
+RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping_headless.launch src/hector_slam/hector_slam_launch/launch/dhbw_mapping.launch
+RUN rm src/rplidar_ros/launch/view_rplidar_a3.launch
+RUN rm src/rplidar_ros/launch/view_rplidar.launch
+
+# install necessary ros extensions
+RUN rosdep install -y --from-paths . -i
 
 # build catkin workspace
 WORKDIR /schwarmroboter_ws

@@ -39,7 +39,7 @@ RUN git clone https://github.com/lschirmbrand/hector_slam_dhbw.git
 RUN rm src/hector_slam/hector_mapping/launch/mapping_default.launch
 RUN cp hector_slam_dhbw/srcs/mapping/mapping_default.launch src/hector_slam/hector_mapping/launch
 RUN rm src/hector_slam/hector_slam_launch/launch/tutorial.launch
-RUN cp hector_slam_dhbw/srcs/launching/tutorial.launch src/hector_slam/hector_slam_launch/launch
+RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping.launch src/hector_slam/hector_slam_launch/launch/dhbw_mapping.launch
 
 # build catkin workspace
 WORKDIR /schwarmroboter_ws
