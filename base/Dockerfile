@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # bootstrap rosdep
 RUN rosdep init && \
-  rosdep update --rosdistro $ROS_DISTRO && \
+  rosdep update --rosdistro $ROS_DISTRO
 
 # install git
 RUN rm -rf /var/lib/apt/lists/*
@@ -40,7 +40,12 @@ RUN rm src/rplidar_ros/launch/view_rplidar_a3.launch
 RUN rm src/rplidar_ros/launch/view_rplidar.launch
 
 # install necessary ros extensions
-RUN rosdep install -y --from-paths . -i
+RUN sudo apt-get install ros-noetic-tf -y
+RUN sudo apt-get install libeigen3-dev -y
+RUN sudo apt-get install ros-noetic-cv-bridge -y
+RUN sudo apt-get install ros-noetic-image-transport -y
+RUN sudo apt-get install ros-noetic-laser-geometry -y
+RUN sudo apt-get install qt5-default -y
 
 # build catkin workspace
 WORKDIR /schwarmroboter_ws

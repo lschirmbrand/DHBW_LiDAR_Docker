@@ -18,7 +18,7 @@ RUN #rosdep init && \
   rosdep update
 
 # install git
-RUN rm -rf /var/lib/apt/lists/*
+RUN rm -rf /var/lib/apt/lists/* \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
     && apt-get -y install git 
