@@ -22,9 +22,10 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git
 
-# install ros & hectorslam
+# install rplidar, ydlidar & hectorslam
 WORKDIR /schwarmroboter_ws/src
 RUN git clone https://github.com/robopeak/rplidar_ros.git
+RUN git clone https://github.com/YDLIDAR/ydlidar_ros_driver.git ydlidar_ws/src/ydlidar_ros_driver
 RUN git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 
 
@@ -39,6 +40,9 @@ RUN rm src/hector_slam/hector_slam_launch/launch/tutorial.launch
 RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping_headless.launch src/hector_slam/hector_slam_launch/launch/dhbw_mapping.launch
 RUN rm src/rplidar_ros/launch/view_rplidar_a3.launch
 RUN rm src/rplidar_ros/launch/view_rplidar.launch
+
+RUN cd src/ydlidar_ros_driver/launch
+RUN rm $ rm -v !("X4.launch")
 
 # install necessary ros extensions
 RUN sudo apt-get install ros-noetic-tf -y

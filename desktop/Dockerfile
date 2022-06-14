@@ -23,9 +23,10 @@ RUN rm -rf /var/lib/apt/lists/* \
     && apt-get install -y --no-install-recommends \
     && apt-get -y install git 
 
-# install ros & hectorslam
+# install rplidar, ydlidar & hectorslam
 WORKDIR /schwarmroboter_ws/src
 RUN git clone https://github.com/robopeak/rplidar_ros.git
+RUN git clone https://github.com/YDLIDAR/ydlidar_ros_driver.git ydlidar_ws/src/ydlidar_ros_driver
 RUN git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 
 # install necessary ros extensions
@@ -40,6 +41,9 @@ RUN rm src/hector_slam/hector_mapping/launch/mapping_default.launch
 RUN cp hector_slam_dhbw/srcs/mapping/mapping_default.launch src/hector_slam/hector_mapping/launch
 RUN rm src/hector_slam/hector_slam_launch/launch/tutorial.launch
 RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping.launch src/hector_slam/hector_slam_launch/launch/dhbw_mapping.launch
+
+RUN cd src/ydlidar_ros_driver/launch
+RUN rm $ rm -v !("X4.launch")
 
 # build catkin workspace
 WORKDIR /schwarmroboter_ws
