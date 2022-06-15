@@ -54,8 +54,9 @@ RUN sudo apt-get install qt5-default -y
 
 
 # Install YDLIDAR driver/sdk
+WORKDIR /schwarmroboter_ws
 RUN git clone https://github.com/YDLIDAR/YDLidar-SDK.git
-RUN cd YDLidar-SDK/build
+WORKDIR /schwarmroboter_ws/YDLidar-SDK/build
 RUN cmake ..
 RUN make
 RUN sudo make install
