@@ -40,8 +40,8 @@ RUN rm src/hector_slam/hector_slam_launch/launch/tutorial.launch
 RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping_headless.launch src/hector_slam/hector_slam_launch/launch/dhbw_mapping.launch
 RUN rm src/rplidar_ros/launch/view_rplidar_a3.launch
 RUN rm src/rplidar_ros/launch/view_rplidar.launch
-RUN rm -v src/ydlidar_ros_driver/launch/
-RUN cp hector_slam_dhbw/srcs/launch/dhbw_mapping_x4.launch src/ydlidar_ros_driver/launch
+RUN rm -v src/ydlidar_ros_driver/launch/*
+RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping_x4.launch src/ydlidar_ros_driver/launch
 
 # install necessary ros extensions
 RUN sudo apt-get install ros-noetic-tf -y
