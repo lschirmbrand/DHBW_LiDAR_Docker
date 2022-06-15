@@ -23,7 +23,7 @@ The docker container itself doesn't have any graphical display, so you have to p
 **Notice**: You offer your display to everyone, so you should run ``xhost -`` after you run the container. You can also specify which machine is allowed to access your display.
 
 Now you can finally run the container by typing:
-``docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/ttyUSB0 lidar_testing bash``
+``docker run -it --net=host --device=/dev/ttyUSB0 lschirmbrand/dhbw_navigation_core bash``
 
 This opens a terminal instance of the container. For ROS you need more than one terminal instance, so you have to open more terminals, what you can do by typing:
 ``docker exec -it name bash``
