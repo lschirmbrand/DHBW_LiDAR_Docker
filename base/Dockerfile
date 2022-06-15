@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # bootstrap rosdep
 RUN rm /etc/ros/rosdep/sources.list.d/20-default.list
 RUN rosdep init && \
-  rosdep update --rosdistro $ROS_DISTRO
+    rosdep update --rosdistro $ROS_DISTRO
 
 # install git
 RUN rm -rf /var/lib/apt/lists/*
