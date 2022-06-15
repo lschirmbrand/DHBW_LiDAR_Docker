@@ -41,8 +41,8 @@ RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping_headless.launch src/hector_s
 RUN rm src/rplidar_ros/launch/view_rplidar_a3.launch
 RUN rm src/rplidar_ros/launch/view_rplidar.launch
 
-RUN cd src/ydlidar_ros_driver/launch
-RUN rm $ rm -v !("X4.launch")
+# RUN cd src/ydlidar_ros_driver/launch
+# RUN rm $ rm -v !("X4.launch")
 
 # install necessary ros extensions
 RUN sudo apt-get install ros-noetic-tf -y
@@ -52,7 +52,19 @@ RUN sudo apt-get install ros-noetic-image-transport -y
 RUN sudo apt-get install ros-noetic-laser-geometry -y
 RUN sudo apt-get install qt5-default -y
 
+
+# Install YDLIDAR driver/sdk
+RUN git clone https://github.com/YDLIDAR/YDLidar-SDK.git
+RUN cd YDLidar-SDK/build
+RUN cmake ..
+RUN make
+RUN sudo make install
+
 # build catkin workspace
 WORKDIR /schwarmroboter_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
     catkin_make_isolated -j1"
+
+# Create permanent ROS enviroment variables
+RUN echo "source ~/schwarmroboter_ws/devel_isolated/setup.bash" >> ~/.bashrc
+RUN source ~/.bashrc
