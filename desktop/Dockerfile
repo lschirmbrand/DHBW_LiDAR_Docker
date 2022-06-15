@@ -20,8 +20,7 @@ RUN #rosdep init && \
 # install git
 RUN rm -rf /var/lib/apt/lists/* \
     && apt-get update \
-    && apt-get install -y --no-install-recommends \
-    && apt-get -y install git 
+    && apt-get install -y --no-install-recommends git 
 
 # install rplidar, ydlidar & hectorslam
 WORKDIR /schwarmroboter_ws/src
@@ -29,23 +28,34 @@ RUN git clone https://github.com/robopeak/rplidar_ros.git
 RUN git clone https://github.com/YDLIDAR/ydlidar_ros_driver.git ydlidar_ws/src/ydlidar_ros_driver
 RUN git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 
-# install necessary ros extensions
-RUN rosdep install -y --from-paths . -i
-
 # install adapted hector_slam files
 WORKDIR /schwarmroboter_ws
 RUN git clone https://github.com/lschirmbrand/hector_slam_dhbw.git
 
 # copy adapted files
 RUN rm src/hector_slam/hector_mapping/launch/mapping_default.launch
-RUN cp hector_slam_dhbw/srcs/mapping/mapping_default.launch src/hector_slam/hector_mapping/launch
+RUN cp hector_slam_dhbw/srcs/mapping/mapping_default_rplidar.launch src/hector_slam/hector_mapping/launch
 RUN rm src/hector_slam/hector_slam_launch/launch/tutorial.launch
-RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping.launch src/hector_slam/hector_slam_launch/launch/dhbw_mapping.launch
+RUN cp hector_slam_dhbw/srcs/mapping/mapping_default_ydlidar.launch src/hector_slam/hector_mapping/launch
+RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping_headless.launch src/hector_slam/hector_slam_launch/launch/dhbw_mapping.launch
+RUN rm -v src/ydlidar_ros_driver/launch/*
+RUN cp hector_slam_dhbw/srcs/launching/dhbw_mapping_x4.launch src/ydlidar_ros_driver/launch
 
-RUN cd src/ydlidar_ros_driver/launch
-RUN rm $ rm -v !("X4.launch")
+# install necessary ros extensions
+RUN rosdep install -y --from-paths . -i
+
+# Install YDLIDAR driver/sdk
+WORKDIR /schwarmroboter_ws
+RUN git clone https://github.com/YDLIDAR/YDLidar-SDK.git
+WORKDIR /schwarmroboter_ws/YDLidar-SDK/build
+RUN cmake ..
+RUN make
+RUN sudo make install
 
 # build catkin workspace
 WORKDIR /schwarmroboter_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
     catkin_make_isolated -j1"
+
+# Create permanent ROS enviroment variables
+RUN echo "source ~/../schwarmroboter_ws/devel_isolated/setup.bash" >> ~/.bashrc

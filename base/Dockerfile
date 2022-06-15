@@ -28,12 +28,12 @@ RUN git clone https://github.com/robopeak/rplidar_ros.git
 RUN git clone https://github.com/YDLIDAR/ydlidar_ros_driver.git
 RUN git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 
-
 # install adapted hector_slam files
 WORKDIR /schwarmroboter_ws
 RUN git clone https://github.com/lschirmbrand/hector_slam_dhbw.git
 
 # copy adapted files
+RUN rm src/hector_slam/hector_mapping/launch/mapping_default.launch
 RUN cp hector_slam_dhbw/srcs/mapping/mapping_default_rplidar.launch src/hector_slam/hector_mapping/launch
 RUN rm src/hector_slam/hector_slam_launch/launch/tutorial.launch
 RUN cp hector_slam_dhbw/srcs/mapping/mapping_default_ydlidar.launch src/hector_slam/hector_mapping/launch
@@ -50,7 +50,6 @@ RUN sudo apt-get install ros-noetic-cv-bridge -y
 RUN sudo apt-get install ros-noetic-image-transport -y
 RUN sudo apt-get install ros-noetic-laser-geometry -y
 RUN sudo apt-get install qt5-default -y
-
 
 # Install YDLIDAR driver/sdk
 WORKDIR /schwarmroboter_ws
