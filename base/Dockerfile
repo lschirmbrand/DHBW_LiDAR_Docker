@@ -68,4 +68,3 @@ RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
 
 # Create permanent ROS enviroment variables
 RUN echo "source ~/../schwarmroboter_ws/devel_isolated/setup.bash" >> ~/.bashrc
-RUN source ~/.bashrc
