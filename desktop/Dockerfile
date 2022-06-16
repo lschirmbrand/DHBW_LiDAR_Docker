@@ -25,7 +25,7 @@ RUN rm -rf /var/lib/apt/lists/* \
 # install rplidar, ydlidar & hectorslam
 WORKDIR /schwarmroboter_ws/src
 RUN git clone https://github.com/robopeak/rplidar_ros.git
-RUN git clone https://github.com/YDLIDAR/ydlidar_ros_driver.git ydlidar_ws/src/ydlidar_ros_driver
+RUN git clone https://github.com/YDLIDAR/ydlidar_ros_driver.git
 RUN git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 
 # install adapted hector_slam files
